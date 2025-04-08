@@ -1,0 +1,223 @@
+ /* Menu Box */
+ .menu-box {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Untuk desktop */
+    border: 1px solid #333;
+    background: linear-gradient(135deg, #000000, #4b3621, #8b5e3b);
+
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    height: 50vh; /* Tinggi lebih besar untuk desktop */
+}
+
+.menu-text {
+    width: 70%;
+    font-size: 20px;
+    color: #f5f5dc;
+    line-height: 1.5;
+    padding-right: 10px;
+    font-weight: 700;
+
+}
+
+.image-placeholder {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.full-width-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Menu Served */
+.menu-served {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(135deg, #000000, #4b3621, #8b5e3b);
+    padding: 20px;
+    color: #fff;
+    margin: 20px auto;
+}
+
+.menu-item {
+    text-align: center;
+    color: #fff;
+    width: 120px;
+}
+
+.image-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    background-color: #555;
+}
+
+.image-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-item p {
+    font-size: 14px;
+    margin: 0;
+    color: #f5f5dc;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .menu-box {
+        width: 90%;
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        height: auto; /* Tinggi otomatis untuk mobile */
+    }
+
+    .menu-text {
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+
+    .image-placeholder {
+        width: 100%;
+        height: 150px; /* Tinggi lebih kecil untuk mobile */
+    }
+
+    .menu-served {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .menu-item {
+        margin-bottom: 15px;
+    }
+
+    .image-circle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .menu-item p {
+        font-size: 16px;
+    }
+}
+
+
+   /* Container utama yang membungkus gambar dan teks */
+   .hero {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Bagian kiri untuk gambar */
+.hero-image {
+    position: relative;
+    width: 50%;
+}
+
+/* Gambar dengan ukuran penuh */
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay transparan di atas gambar */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparansi hitam */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Bagian kanan untuk teks */
+.hero-text {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    background-color: #222; /* Warna background untuk kontras */
+    color: white;
+}
+
+.hero-text h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .hero-image, .hero-text {
+        width: 100%;
+    }
+
+    .hero-image {
+        height: 50vh; /* Mengatur tinggi gambar pada layar kecil */
+    }
+
+    .hero-overlay h2 {
+        font-size: 24px; /* Menyesuaikan ukuran teks overlay pada layar kecil */
+    }
+
+    .hero-text h1 {
+        font-size: 28px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+}
+
+.button {
+    background-color: #D2B48C; /* Coklat terang */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efek saat kursor menyentuh button */
+.button:hover {
+    background-color: #FFD700; /* Warna terang saat hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05); /* Memberikan efek pembesaran */
+}

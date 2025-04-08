@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #3E2723, #6D4C41);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #payment-form {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin: 10px 0;
+            color: white;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px 1px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ddd; /* Border warna grey */
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.3); /* Latar belakang transparan */
+            color: #ddd; /* Warna teks menjadi hitam */
+            font-size: 16px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            background-color: rgba(255, 255, 255, 0.6); /* Latar belakang lebih terang saat fokus */
+            border-color: #6D4C41; /* Warna coklat saat fokus */
+        }
+
+        option {
+            background-color: rgba(255, 255, 255, 0.3); /* Background transparan untuk opsi */
+            color: black; /* Teks hitam untuk setiap opsi */
+        }
+
+        button {
+            background-color: #6D4C41;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3E2723;
+        }
+
+        #total-price {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="payment-form">
+        <h2>Order Form</h2>
+        <form id="order-form">
+            <label for="product">Product:</label>
+            <select id="product" name="product" onchange="updateTotalPrice()" required>
+                <option value="coffe">Espresso Coffee - 40k</option>
+                <option value="tea">Cappuccino Coffee - 55k</option>
+                <option value="cake">Americano Coffee - 70k</option>
+                <option value="Maccha">Maccha Tea - 55k</option>
+                <option value="Roti">Croissant - 45k</option>
+                <option value="brownies">Brownies - 50k</option>
+            </select><br>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" onchange="updateTotalPrice()" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <div id="total-price">Total Price: Rp 40,000</div>
+
+            <button type="button" onclick="redirectToWhatsApp()">Order Now</button>
+        </form>
+    </div>
+
+    <script>
+        // Harga produk
+        const productPrices = {
+            'coffe': 40000,
+            'tea': 55000,
+            'cake': 70000,
+            'Maccha': 55000,
+            'Roti': 45000,
+            'brownies': 50000,
+        };
+
+        // Fungsi untuk menghitung harga total saat produk atau kuantitas diubah
+        function updateTotalPrice() {
+            const product = document.getElementById('product').value;
+            const quantity = document.getElementById('quantity').value;
+            const pricePerUnit = productPrices[product];
+            const totalPrice = pricePerUnit * quantity;
+            
+            // Menampilkan harga total
+            document.getElementById('total-price').innerText = `Total Price: Rp ${totalPrice.toLocaleString()}`;
+        }
+
+        // Fungsi untuk memberikan peringatan jika kuantitas lebih dari 100
+        document.getElementById('quantity').addEventListener('input', function() {
+            const quantity = this.value;
+            if (quantity > 100) {
+                alert("Jumlah maksimal yang dapat dipesan adalah 100!");
+                this.value = 100;  // Mengatur kembali nilai input ke 100
+                updateTotalPrice();  // Update harga total setelah perbaikan
+            }
+        });
+
+        // Fungsi untuk mengarahkan ke WhatsApp dengan rincian pesanan
+        function redirectToWhatsApp() {
+            const product = document.getElementById('product').value;
+            const quantity = document.getElementById('quantity').value;
+            const email = document.getElementById('email').value;
+
+            // Nama produk dan harga berdasarkan produk yang dipilih
+            const productName = product === 'coffe' ? 'Espresso Coffee' :
+                                product === 'tea' ? 'Cappuccino Coffee' :
+                                product === 'cake' ? 'Americano Coffee' :
+                                product === 'Maccha' ? 'Maccha Tea' :
+                                product === 'Roti' ? 'Croissant' :
+                                product === 'brownies' ? 'Brownies' : '';
+            
+            const productPrice = productPrices[product];
+            const totalPrice = productPrice * quantity;
+
+            // Format pesan untuk WhatsApp
+            const message = `I would like to order ${quantity} ${productName}(s) for a total of Rp ${totalPrice.toLocaleString()}.\nMy email is: ${email}`;
+
+            // Nomor WhatsApp Anda
+            const waNumber = '+6281353018785';  // Ganti dengan nomor WhatsApp Anda
+            const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+            window.location.href = waLink;
+        }
+        
+
+        // Inisialisasi harga total pada saat halaman dimuat
+        window.onload = updateTotalPrice;
+    </script>
+</body>
+</html>
